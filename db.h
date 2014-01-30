@@ -101,11 +101,11 @@ public:
   }
   
   bool IsGood() const {
-    if (ip.GetPort() != GetDefaultPort()) return false;
-    if (!(services & NODE_NETWORK)) return false;
-    if (!ip.IsRoutable()) return false;
-    if (clientVersion && clientVersion < REQUIRE_VERSION) return false;
-    if (blocks && blocks < GetRequireHeight()) return false;
+    if (ip.GetPort() != GetDefaultPort()) {  printf("1"); return false; }
+    if (!(services & NODE_NETWORK)) {  printf("2"); return false; }
+    if (!ip.IsRoutable()) {  printf("3"); return false; }
+    if (clientVersion && clientVersion < REQUIRE_VERSION) {  printf("4"); return false; }
+    if (blocks && blocks < GetRequireHeight()) {  printf("5"); return false; }
 
     if (total <= 3 && success * 2 >= total) return true;
 
@@ -115,7 +115,7 @@ public:
     if (stat1W.reliability > 0.45 && stat1W.count > 16) return true;
     if (stat1M.reliability > 0.35 && stat1M.count > 32) return true;
     
-    return false;
+    printf("6"); return false;
   }
   int GetBanTime() const {
     if (IsGood()) return 0;
